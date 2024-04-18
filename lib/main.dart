@@ -25,15 +25,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -78,7 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 15,
             ),
-            FilledButton(onPressed: () {}, child: Text('Login'))
+            FilledButton(onPressed: () {}, child: Text('Login')),
+            const SizedBox(
+              height: 15,
+            )
           ],
         ));
   }
@@ -96,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: padding,
                 child: Column(children: [
                   const SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
                   TextFormField(
                     decoration: decorationUser,
@@ -110,7 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  FilledButton(onPressed: () {}, child: Text('Login'))
+                  FilledButton(onPressed: () {}, child: Text('Login')),
+                  const SizedBox(
+                    height: 15,
+                  )
                 ])))
       ],
     );
@@ -132,15 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: width,
                   fit: BoxFit.cover,
                   'https://images.unsplash.com/photo-1584722065451-922e4d176e53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-              Container(
-                height: height / 2,
+              SingleChildScrollView(
+                  child: Container(
                 width: width / 1.5,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
-                child: SingleChildScrollView(
-                    child: width > 800 ? horizontal() : vertical()),
-              )
+                child: width > 800 ? horizontal() : vertical(),
+              ))
             ],
           ),
         );

@@ -46,13 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
   );
 
   EdgeInsets padding = const EdgeInsets.only(left: 15, right: 15);
-  Widget vertical() {
+  Widget vertical({required double height}) {
     return Padding(
         padding: padding,
         child: Column(
           children: [
             Image.network(
-                height: MediaQuery.sizeOf(context).height / 5,
+                height: height < 550 ? 125 : height / 5,
                 'https://th.bing.com/th/id/OIG2.xxZAQqi4EqnFzy4H1Uz7?pid=ImgGn'),
             const SizedBox(
               height: 10,
@@ -77,13 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-  Widget horizontal() {
+  Widget horizontal({required double height}) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
             child: Image.network(
-                height: MediaQuery.sizeOf(context).height / 2,
+                height: height < 400 ? 200 : height / 2,
                 'https://th.bing.com/th/id/OIG2.xxZAQqi4EqnFzy4H1Uz7?pid=ImgGn')),
         Expanded(
             child: Padding(
@@ -130,13 +129,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   fit: BoxFit.cover,
                   'https://images.unsplash.com/photo-1584722065451-922e4d176e53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
               SingleChildScrollView(
-                  child: Container(
+                  child: Center(
+                      child: Container(
                 width: width / 1.5,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
-                child: width > 800 ? horizontal() : vertical(),
-              ))
+                child: width > 800
+                    ? horizontal(height: height)
+                    : vertical(height: height),
+              )))
             ],
           ),
         );

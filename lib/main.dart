@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,18 +34,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _isPasswordVisible = false;
+
   InputDecoration decorationUser = InputDecoration(
-    icon: const Icon(Icons.person),
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-    filled: true,
-  );
+      prefixIcon: const Icon(Icons.person),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+      filled: true,
+      labelText: 'Email');
   InputDecoration decorationPass = InputDecoration(
-    icon: const Icon(Icons.lock),
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-    filled: true,
-  );
+      prefixIcon: const Icon(Icons.lock),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+      filled: true,
+      labelText: 'Password');
 
   EdgeInsets padding = const EdgeInsets.only(left: 15, right: 15);
   Widget vertical({required double height}) {
@@ -59,12 +66,24 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextFormField(
               decoration: decorationUser,
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(
               height: 15,
             ),
             TextFormField(
-              decoration: decorationPass,
+              decoration: decorationPass.copyWith(
+                  suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              )),
+              obscureText: !_isPasswordVisible,
             ),
             const SizedBox(
               height: 15,
@@ -88,17 +107,28 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Padding(
                 padding: padding,
                 child: Column(children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
                   TextFormField(
                     decoration: decorationUser,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   TextFormField(
-                    decoration: decorationPass,
+                    decoration: decorationPass.copyWith(
+                        suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                    )),
+                    obscureText: !_isPasswordVisible,
                   ),
                   const SizedBox(
                     height: 15,
